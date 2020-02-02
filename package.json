@@ -1,0 +1,25 @@
+{
+  "name": "imagick-bot",
+  "version": "1.0.0",
+  "description": "IMagick-bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scroll17/imagick-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scroll17/imagick-bot/issues"
+  },
+  "homepage": "https://github.com/scroll17/imagick-bot#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "telegraf": "^3.36.0",
+    "tesseract.js": "^2.0.2"
+  }
+}
