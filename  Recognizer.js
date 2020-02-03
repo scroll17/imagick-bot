@@ -1,9 +1,14 @@
-const config = require('./Recognizer.config');
-
 const { createWorker } = require('tesseract.js');
 
 const axios = require('axios');
-const fs = require('fs')
+const fs = require('fs');
+
+const config =  {
+    logger: console.log.bind(console),
+    langPath: './traineddata', // путь для загрузки обученных данных
+    cachePath: './cacheddata', // путь для кэшированных обученных данных
+    //dataPath: 'trainingdata' // путь для сохранения обученных данных
+}
 
 module.exports = class Recognizer {
    constructor(worker, langs){
@@ -20,11 +25,13 @@ module.exports = class Recognizer {
         const logger = console.log.bind(console); //options.logger || console.log.bind(console);
         const langs = ['eng'].join('+'); //(options.langs || ['eng']).join('+');
 
-        // const worker = createWorker({ 
-        //     ...config
-        //  });
+        const worker = createWorker({
+            logger,
+            langPath: config.langPath,
+            dataPath: config.dataPath
+            //cachePath: config.cachePath
+        })
 
-        const worker = createWorker(config)
 
         await worker.load();
         await worker.loadLanguage(langs);

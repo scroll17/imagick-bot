@@ -5,15 +5,18 @@ const Telegraf = require('telegraf');
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 let recognizer;
-(async() => recognizer = await Recognizer.asyncInit())
 
 bot.on('photo', async (ctx) => {
+    if(!recognizer){
+        recognizer = await Recognizer.asyncInit()
+    }
+
     let maxPhotoSizeID = ctx.message.photo.length - 1;
     let fileId = ctx.message.photo[maxPhotoSizeID].file_id;
     let link = await ctx.telegram.getFileLink(fileId)
 
     //let responseText = await recognizer.saveAndRecognize(link,`images/${userId}:${fileId}.jpeg`);
-    let responseText = await Recognizer.recognize(link);
+    let responseText = await recognizer.recognize(link);
     return ctx.reply(responseText.value())
 })
 
